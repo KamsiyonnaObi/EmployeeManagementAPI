@@ -1,0 +1,10 @@
+{
+  "sqltools.connections": [
+    {
+      "previewLimit": 50,
+      "driver": "SQLite",
+      "name": "EmployeessAPI",
+      "database": "${workspaceFolder:Employee Management API}/TheEmployeeAPI/employees.db"
+    }
+  ]
+}
