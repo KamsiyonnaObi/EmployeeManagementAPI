@@ -7,6 +7,8 @@ public class AppDbContext : DbContext
     }
 
     public DbSet<Employee> Employees { get; set; }
+    public DbSet<Benefit> Benefits { get; set; }
+    public DbSet<EmployeeBenefits> EmployeeBenefits { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -10,6 +10,7 @@ namespace TheEmployeeAPI.Tests
 {
     public class EmployeeControllerTests : IClassFixture<CustomWebApplicationFactory<Program>>
     {
+        private readonly int _employeeId = 1;
         private readonly CustomWebApplicationFactory<Program> _factory;
 
         public EmployeeControllerTests(CustomWebApplicationFactory<Program> factory)
@@ -90,5 +91,20 @@ namespace TheEmployeeAPI.Tests
 
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
         }
+
+        [Fact]
+        public async Task GetBenefitsForEmployee_ReturnsOkResult()
+        {
+            // Act
+            var client = _factory.CreateClient();
+            var response = await client.GetAsync($"/employees/{_employeeId}/benefits");
+
+            // Assert
+            response.EnsureSuccessStatusCode();
+
+            // var benefits = await response.Content.ReadFromJsonAsync<IEnumerable<GetEmployeeBenefitsDto>>();
+            // Assert.Equal(2, benefits.Count());
+        }
+    
     }
 }

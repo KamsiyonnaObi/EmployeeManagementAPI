@@ -5,7 +5,20 @@ public static class SeedData
     public static void Seed(IServiceProvider serviceProvider)
     {
         var context = serviceProvider.GetRequiredService<AppDbContext>();
+        if (!context.Benefits.Any())
+        {
+            var baseBenefits = new List<Benefit>
+            {
+                new Benefit { Name = "Health Insurance", Description = "Covers medical expenses", BaseCost = 150 },
+                new Benefit { Name = "Dental Plan", Description = "Includes dental check-ups and procedures", BaseCost = 75 },
+                new Benefit { Name = "Vision Care", Description = "Covers eye exams and eyewear", BaseCost = 50 },
+                new Benefit { Name = "Life Insurance", Description = "Life insurance coverage", BaseCost = 100 }
+            };
 
+            context.Benefits.AddRange(baseBenefits);
+            context.SaveChanges();
+        }
+        
         if (!context.Employees.Any())
         {
             var firstNames = new[] { "John", "Jane", "Alex", "Taylor", "Chris", "Morgan", "Casey", "Jordan", "Cameron", "Riley" };
@@ -18,11 +31,12 @@ public static class SeedData
 
             var employees = Enumerable.Range(1, 10).Select(i =>
             {
+                var benefits = context.Benefits.ToList();
                 var firstName = firstNames[random.Next(firstNames.Length)];
                 var lastName = lastNames[random.Next(lastNames.Length)];
                 var email = $"{firstName.ToLower()}.{lastName.ToLower()}{i}@example.com";
 
-                return new Employee
+                var employee = new Employee
                 {
                     FirstName = firstName,
                     LastName = lastName,
@@ -34,30 +48,23 @@ public static class SeedData
                     ZipCode = $"{random.Next(10000, 99999)}",
                     PhoneNumber = $"555-{random.Next(100, 999)}-{random.Next(1000, 9999)}",
                     Email = email,
-                    Benefits = GenerateRandomBenefits(random)
                 };
+
+                var selectedBenefits = benefits.OrderBy(_ => random.Next()).Take(random.Next(1, 4)).ToList();
+                employee.Benefits = selectedBenefits.Select(b => new EmployeeBenefits
+                {
+                    Benefit = b,
+                    BenefitId = b.Id,
+                    Cost = Math.Round(b.BaseCost + (decimal)(random.NextDouble() * 50), 2) // Add variability
+                }).ToList();
+                
+                return employee;
+
             }).ToList();
 
             context.Employees.AddRange(employees);
             context.SaveChanges();
         }
 
-    }
-    private static List<EmployeeBenefits> GenerateRandomBenefits(Random random)
-    {
-        var benefits = new List<EmployeeBenefits>();
-        var benefitTypes = Enum.GetValues(typeof(BenefitType)).Cast<BenefitType>().ToList();
-        var selectedTypes = benefitTypes.OrderBy(_ => random.Next()).Take(random.Next(1, 4)).ToList();
-
-        foreach (var type in selectedTypes)
-        {
-            benefits.Add(new EmployeeBenefits
-            {
-                BenefitType = type,
-                Cost = Math.Round((decimal)(random.NextDouble() * 100 + 25), 2) // Cost between 25.00 and 125.00
-            });
-        }
-
-        return benefits;
     }
 }

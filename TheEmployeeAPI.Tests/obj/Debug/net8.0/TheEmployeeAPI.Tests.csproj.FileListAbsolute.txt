@@ -445,3 +445,4 @@
 /Users/kamsiyonna/Desktop/Software Apps/C# Projects/Employee Management API/TheEmployeeAPI.Tests/obj/Debug/net8.0/TheEmployeeAPI.Tests.pdb
 /Users/kamsiyonna/Desktop/Software Apps/C# Projects/Employee Management API/TheEmployeeAPI.Tests/obj/Debug/net8.0/TheEmployeeAPI.Tests.genruntimeconfig.cache
 /Users/kamsiyonna/Desktop/Software Apps/C# Projects/Employee Management API/TheEmployeeAPI.Tests/obj/Debug/net8.0/ref/TheEmployeeAPI.Tests.dll
+/Users/kamsiyonna/Desktop/Software Apps/C# Projects/Employee Management API/TheEmployeeAPI.Tests/obj/Debug/net8.0/TheEmployeeAPI.Tests.sourcelink.json

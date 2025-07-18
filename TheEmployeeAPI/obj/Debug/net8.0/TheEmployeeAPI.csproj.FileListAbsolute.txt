@@ -608,3 +608,4 @@
 /Users/kamsiyonna/Desktop/Software Apps/C# Projects/Employee Management API/TheEmployeeAPI/obj/Debug/net8.0/TheEmployeeAPI.pdb
 /Users/kamsiyonna/Desktop/Software Apps/C# Projects/Employee Management API/TheEmployeeAPI/obj/Debug/net8.0/TheEmployeeAPI.genruntimeconfig.cache
 /Users/kamsiyonna/Desktop/Software Apps/C# Projects/Employee Management API/TheEmployeeAPI/obj/Debug/net8.0/ref/TheEmployeeAPI.dll
+/Users/kamsiyonna/Desktop/Software Apps/C# Projects/Employee Management API/TheEmployeeAPI/obj/Debug/net8.0/TheEmployeeAPI.sourcelink.json
